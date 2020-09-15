@@ -60,7 +60,9 @@ func CreateProduct(c *fiber.Ctx) error {
 
 	*&product.ID = id
 
-	products = append(products, *product)
+	go func() {
+		products = append(products, *product)
+	}()
 
 	return c.JSON(product)
 }
