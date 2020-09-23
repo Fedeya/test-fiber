@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"test-fiber/handlers"
+	"github.com/fedeya/test-fiber/controllers"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -11,8 +11,8 @@ func Products(app *fiber.App) {
 
 	api := app.Group("/products")
 
-	api.Get("/", handlers.GetProducts)
-	api.Get("/:id", handlers.GetProduct)
-	api.Post("/", handlers.CreateProduct)
-	api.Delete("/:id", handlers.DeleteProduct)
+	api.Get("/", controllers.GetProducts)
+	api.Get("/:id", controllers.GetProduct)
+	api.Post("/", controllers.CreateProduct)
+	api.Delete("/:id", controllers.DeleteProduct)
 }
