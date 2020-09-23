@@ -43,6 +43,26 @@ func CreateProduct(c *fiber.Ctx) error {
 	return c.JSON(product)
 }
 
+// UpdateProduct is a handler for update product by id
+func UpdateProduct(c *fiber.Ctx) error {
+	var body map[string]interface{}
+	var product models.Product
+	db := db.Get()
+
+	result := db.Find(&product, c.Params("id"))
+	if result.RowsAffected == 0 {
+		return fiber.ErrNotFound
+	}
+
+	if err := c.BodyParser(&body); err != nil {
+		return fiber.ErrBadRequest
+	}
+
+	db.Model(&product).Updates(body)
+
+	return c.JSON(product)
+}
+
 // DeleteProduct is a handler for delete product by id
 func DeleteProduct(c *fiber.Ctx) error {
 
